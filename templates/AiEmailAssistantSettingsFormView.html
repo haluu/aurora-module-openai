@@ -1,0 +1,100 @@
+<div class="panel_top">
+	<h2 class="settings_heading" data-bind="i18n: {'key': '%MODULENAME%/HEADING_SETTINGS_TAB'}"></h2>
+</div>
+<div class="panel_center">
+	<div class="fields">
+		<div class="fieldset">
+			<div class="row">
+				<span class="value">
+					<label class="custom_checkbox" data-bind="css: {'checked': enableModule}">
+						<span class="icon"></span>
+						<input type="checkbox" id="enableAiEmailAssistantModule" data-bind="checked: enableModule" />
+					</label>
+					<label for="enableAiEmailAssistantModule" data-bind="i18n: {'key': '%MODULENAME%/LABEL_ENABLE_MODULE'}"></label>
+				</span>
+			</div>
+		</div>
+
+		<!-- ko if: enableModule() -->
+		<div class="fieldset">
+			<div class="row">
+				<label class="form_label" data-bind="i18n: {'key': '%MODULENAME%/LABEL_OPENAI_API_KEY'}"></label>
+				<span class="value">
+					<div class="api_key_container">
+						<!-- ko if: apiKeyVisible() -->
+						<input type="text" class="input api_key_input" data-bind="value: openAiApiKey, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_API_KEY')}" />
+						<!-- /ko -->
+						<!-- ko if: !apiKeyVisible() -->
+						<input type="password" class="input api_key_input" data-bind="value: openAiApiKey, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_API_KEY')}" />
+						<!-- /ko -->
+						<button class="button toggle_visibility" data-bind="click: toggleApiKeyVisibility">
+							<!-- ko if: apiKeyVisible() -->
+							<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_HIDE'}"></span>
+							<!-- /ko -->
+							<!-- ko if: !apiKeyVisible() -->
+							<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_SHOW'}"></span>
+							<!-- /ko -->
+						</button>
+						<button class="button clear_key" data-bind="click: clearApiKey">
+							<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_CLEAR'}"></span>
+						</button>
+					</div>
+					<!-- ko if: !isValidApiKey() -->
+					<div class="validation_error">
+						<span data-bind="i18n: {'key': '%MODULENAME%/ERROR_INVALID_API_KEY'}"></span>
+					</div>
+					<!-- /ko -->
+					<div class="description">
+						<span data-bind="i18n: {'key': '%MODULENAME%/DESCRIPTION_API_KEY'}"></span>
+						<br>
+						<a href="https://platform.openai.com/api-keys" target="_blank" data-bind="i18n: {'key': '%MODULENAME%/LINK_GET_API_KEY'}"></a>
+					</div>
+				</span>
+			</div>
+		</div>
+
+		<div class="fieldset">
+			<div class="row">
+				<label class="form_label" data-bind="i18n: {'key': '%MODULENAME%/LABEL_DEFAULT_MODEL'}"></label>
+				<span class="value">
+					<select class="input model_select" data-bind="value: defaultModel, options: availableModels, optionsText: 'text', optionsValue: 'value'"></select>
+					<div class="description">
+						<span data-bind="i18n: {'key': '%MODULENAME%/DESCRIPTION_MODEL_SELECTION'}"></span>
+					</div>
+				</span>
+			</div>
+		</div>
+
+		<div class="fieldset">
+			<div class="row">
+				<label class="form_label" data-bind="i18n: {'key': '%MODULENAME%/LABEL_MAX_TOKENS'}"></label>
+				<span class="value">
+					<div class="tokens_container">
+						<input type="number" class="input tokens_input" min="100" max="4096" data-bind="value: maxTokens" />
+						<button class="button reset_tokens" data-bind="click: resetMaxTokens">
+							<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_RESET'}"></span>
+						</button>
+					</div>
+					<!-- ko if: !isValidMaxTokens() -->
+					<div class="validation_error">
+						<span data-bind="i18n: {'key': '%MODULENAME%/ERROR_INVALID_MAX_TOKENS'}"></span>
+					</div>
+					<!-- /ko -->
+					<div class="description">
+						<span data-bind="i18n: {'key': '%MODULENAME%/DESCRIPTION_MAX_TOKENS'}"></span>
+					</div>
+				</span>
+			</div>
+		</div>
+		<!-- /ko -->
+
+		<div class="buttons">
+			<span class="button" data-bind="click: save, visible: !isSaving(), enable: hasValidSettings()">
+				<span data-bind="i18n: {'key': 'COREWEBCLIENT/ACTION_SAVE'}"></span>
+			</span>
+			<span class="button" data-bind="visible: isSaving()">
+				<span data-bind="i18n: {'key': 'COREWEBCLIENT/ACTION_SAVE_IN_PROGRESS'}"></span>
+			</span>
+		</div>
+	</div>
+</div>

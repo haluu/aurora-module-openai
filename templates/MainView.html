@@ -1,0 +1,210 @@
+<div class="screen AiEmailAssistant" style="display: none;">
+	<div class="panels">
+		<div class="panel item_viewer">
+			<div class="panel_content">
+				<div class="middle_bar">
+					<div class="panel_center">
+						<div class="ai_assistant_container">
+							<!-- Header -->
+							<div class="ai_header">
+								<h2 data-bind="i18n: {'key': '%MODULENAME%/HEADING_AI_EMAIL_ASSISTANT'}"></h2>
+								<div class="mode_tabs">
+									<span class="mode_tab" data-bind="css: {'active': currentMode() === 'summarize'}, click: function() { setMode('summarize'); }">
+										<span data-bind="i18n: {'key': '%MODULENAME%/TAB_SUMMARIZE'}"></span>
+									</span>
+									<span class="mode_tab" data-bind="css: {'active': currentMode() === 'compose'}, click: function() { setMode('compose'); }">
+										<span data-bind="i18n: {'key': '%MODULENAME%/TAB_COMPOSE'}"></span>
+									</span>
+									<span class="mode_tab" data-bind="css: {'active': currentMode() === 'custom'}, click: function() { setMode('custom'); }">
+										<span data-bind="i18n: {'key': '%MODULENAME%/TAB_CUSTOM'}"></span>
+									</span>
+								</div>
+							</div>
+							
+							<!-- API Key Warning -->
+							<!-- ko if: !hasApiKey() -->
+							<div class="api_key_warning">
+								<div class="warning_content">
+									<span data-bind="i18n: {'key': '%MODULENAME%/WARNING_NO_API_KEY'}"></span>
+									<span class="settings_link" data-bind="i18n: {'key': '%MODULENAME%/ACTION_CONFIGURE_SETTINGS'}, click: openSettings"></span>
+								</div>
+							</div>
+							<!-- /ko -->
+							
+							<!-- Error Display -->
+							<!-- ko if: lastError() -->
+							<div class="error_message">
+								<span data-bind="text: lastError"></span>
+							</div>
+							<!-- /ko -->
+							
+							<!-- Email Summarization Tab -->
+							<!-- ko if: currentMode() === 'summarize' -->
+							<div class="summarize_section">
+								<h3 data-bind="i18n: {'key': '%MODULENAME%/HEADING_EMAIL_SUMMARIZATION'}"></h3>
+								
+								<div class="input_group">
+									<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_EMAIL_CONTENT'}"></label>
+									<textarea class="email_content" rows="8" data-bind="value: emailContent, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_PASTE_EMAIL_CONTENT')}"></textarea>
+								</div>
+								
+								<div class="input_group">
+									<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_CUSTOM_PROMPT_OPTIONAL'}"></label>
+									<textarea class="custom_prompt" rows="3" data-bind="value: customSummaryPrompt, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_CUSTOM_SUMMARY_PROMPT')}"></textarea>
+								</div>
+								
+								<div class="action_buttons">
+									<button class="button summarize_btn" data-bind="enable: canSummarize, click: summarizeEmail">
+										<!-- ko if: !summarizing() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_SUMMARIZE'}"></span>
+										<!-- /ko -->
+										<!-- ko if: summarizing() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_SUMMARIZING'}"></span>
+										<!-- /ko -->
+									</button>
+									<button class="button clear_btn" data-bind="click: clearEmailContent">
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_CLEAR'}"></span>
+									</button>
+								</div>
+								
+								<!-- ko if: summaryResult() -->
+								<div class="result_section">
+									<h4 data-bind="i18n: {'key': '%MODULENAME%/HEADING_SUMMARY_RESULT'}"></h4>
+									<div class="result_content">
+										<div class="result_text" data-bind="text: summaryResult"></div>
+										<div class="result_actions">
+											<button class="button copy_btn" data-bind="click: function() { copyToClipboard(summaryResult()); }">
+												<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COPY'}"></span>
+											</button>
+										</div>
+									</div>
+								</div>
+								<!-- /ko -->
+							</div>
+							<!-- /ko -->
+							
+							<!-- Email Composition Tab -->
+							<!-- ko if: currentMode() === 'compose' -->
+							<div class="compose_section">
+								<h3 data-bind="i18n: {'key': '%MODULENAME%/HEADING_EMAIL_COMPOSITION'}"></h3>
+								
+								<div class="input_group">
+									<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_EMAIL_PURPOSE'}"></label>
+									<input type="text" class="email_purpose" data-bind="value: emailPurpose, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_EMAIL_PURPOSE')}" />
+								</div>
+								
+								<div class="input_row">
+									<div class="input_group half">
+										<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_EMAIL_TONE'}"></label>
+										<select class="email_tone" data-bind="value: emailTone, options: availableTones, optionsText: 'text', optionsValue: 'value'"></select>
+									</div>
+									<div class="input_group half">
+										<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_RECIPIENT_OPTIONAL'}"></label>
+										<input type="text" class="email_recipient" data-bind="value: emailRecipient, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_RECIPIENT')}" />
+									</div>
+								</div>
+								
+								<div class="input_group">
+									<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_KEY_POINTS_OPTIONAL'}"></label>
+									<textarea class="email_key_points" rows="4" data-bind="value: emailKeyPoints, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_KEY_POINTS')}"></textarea>
+								</div>
+								
+								<div class="action_buttons">
+									<button class="button compose_btn" data-bind="enable: canCompose, click: composeEmail">
+										<!-- ko if: !composing() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COMPOSE'}"></span>
+										<!-- /ko -->
+										<!-- ko if: composing() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COMPOSING'}"></span>
+										<!-- /ko -->
+									</button>
+									<button class="button clear_btn" data-bind="click: clearCompositionForm">
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_CLEAR'}"></span>
+									</button>
+								</div>
+								
+								<!-- ko if: composedSubject() || composedBody() -->
+								<div class="result_section">
+									<h4 data-bind="i18n: {'key': '%MODULENAME%/HEADING_COMPOSED_EMAIL'}"></h4>
+									
+									<!-- ko if: composedSubject() -->
+									<div class="composed_subject">
+										<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_SUBJECT'}"></label>
+										<div class="subject_content">
+											<input type="text" readonly data-bind="value: composedSubject" />
+											<button class="button copy_btn" data-bind="click: function() { copyToClipboard(composedSubject()); }">
+												<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COPY'}"></span>
+											</button>
+										</div>
+									</div>
+									<!-- /ko -->
+									
+									<!-- ko if: composedBody() -->
+									<div class="composed_body">
+										<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_EMAIL_BODY'}"></label>
+										<div class="body_content">
+											<textarea readonly rows="10" data-bind="value: composedBody"></textarea>
+											<button class="button copy_btn" data-bind="click: function() { copyToClipboard(composedBody()); }">
+												<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COPY'}"></span>
+											</button>
+										</div>
+									</div>
+									<!-- /ko -->
+								</div>
+								<!-- /ko -->
+							</div>
+							<!-- /ko -->
+							
+							<!-- Custom AI Tab -->
+							<!-- ko if: currentMode() === 'custom' -->
+							<div class="custom_section">
+								<h3 data-bind="i18n: {'key': '%MODULENAME%/HEADING_CUSTOM_AI_REQUEST'}"></h3>
+								
+								<div class="input_group">
+									<label data-bind="i18n: {'key': '%MODULENAME%/LABEL_CUSTOM_PROMPT'}"></label>
+									<textarea class="custom_prompt" rows="6" data-bind="value: customPrompt, attr: {'placeholder': $i18n('%MODULENAME%/PLACEHOLDER_CUSTOM_PROMPT')}"></textarea>
+								</div>
+								
+								<div class="action_buttons">
+									<button class="button process_btn" data-bind="enable: canProcessCustom, click: processCustomPrompt">
+										<!-- ko if: !processingCustom() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_PROCESS'}"></span>
+										<!-- /ko -->
+										<!-- ko if: processingCustom() -->
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_PROCESSING'}"></span>
+										<!-- /ko -->
+									</button>
+									<button class="button clear_btn" data-bind="click: clearCustomPrompt">
+										<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_CLEAR'}"></span>
+									</button>
+								</div>
+								
+								<!-- ko if: customResponse() -->
+								<div class="result_section">
+									<h4 data-bind="i18n: {'key': '%MODULENAME%/HEADING_AI_RESPONSE'}"></h4>
+									<div class="result_content">
+										<div class="result_text" data-bind="text: customResponse"></div>
+										<div class="result_actions">
+											<button class="button copy_btn" data-bind="click: function() { copyToClipboard(customResponse()); }">
+												<span data-bind="i18n: {'key': '%MODULENAME%/ACTION_COPY'}"></span>
+											</button>
+										</div>
+									</div>
+								</div>
+								<!-- /ko -->
+							</div>
+							<!-- /ko -->
+							
+							<!-- Token Usage -->
+							<!-- ko if: tokensUsed() > 0 -->
+							<div class="token_usage">
+								<span data-bind="i18n: {'key': '%MODULENAME%/LABEL_TOKENS_USED'}"></span>: <span data-bind="text: tokensUsed"></span>
+							</div>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

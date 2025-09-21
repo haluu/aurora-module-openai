@@ -1,0 +1,73 @@
+{
+	"HEADING_AI_EMAIL_ASSISTANT": "AI Email Assistant",
+	"HEADING_BROWSER_TAB": "AI Email Assistant",
+	"HEADING_SETTINGS_TAB": "AI Email Assistant",
+	"LABEL_SETTINGS_TAB": "AI Assistant",
+	
+	"ACTION_SHOW_AI_ASSISTANT": "AI Assistant",
+	"ACTION_CONFIGURE_SETTINGS": "Configure Settings",
+	"ACTION_SUMMARIZE": "Summarize",
+	"ACTION_SUMMARIZING": "Summarizing...",
+	"ACTION_COMPOSE": "Compose Email",
+	"ACTION_COMPOSING": "Composing...",
+	"ACTION_PROCESS": "Process Request",
+	"ACTION_PROCESSING": "Processing...",
+	"ACTION_CLEAR": "Clear",
+	"ACTION_COPY": "Copy",
+	"ACTION_SHOW": "Show",
+	"ACTION_HIDE": "Hide",
+	"ACTION_RESET": "Reset",
+	
+	"TAB_SUMMARIZE": "Summarize",
+	"TAB_COMPOSE": "Compose",
+	"TAB_CUSTOM": "Custom AI",
+	
+	"HEADING_EMAIL_SUMMARIZATION": "Email Summarization",
+	"HEADING_EMAIL_COMPOSITION": "Email Composition",
+	"HEADING_CUSTOM_AI_REQUEST": "Custom AI Request",
+	"HEADING_SUMMARY_RESULT": "Summary Result",
+	"HEADING_COMPOSED_EMAIL": "Composed Email",
+	"HEADING_AI_RESPONSE": "AI Response",
+	
+	"LABEL_EMAIL_CONTENT": "Email Content",
+	"LABEL_CUSTOM_PROMPT_OPTIONAL": "Custom Prompt (Optional)",
+	"LABEL_EMAIL_PURPOSE": "Email Purpose",
+	"LABEL_EMAIL_TONE": "Tone",
+	"LABEL_RECIPIENT_OPTIONAL": "Recipient (Optional)",
+	"LABEL_KEY_POINTS_OPTIONAL": "Key Points (Optional)",
+	"LABEL_CUSTOM_PROMPT": "Custom Prompt",
+	"LABEL_SUBJECT": "Subject",
+	"LABEL_EMAIL_BODY": "Email Body",
+	"LABEL_TOKENS_USED": "Tokens Used",
+	
+	"PLACEHOLDER_PASTE_EMAIL_CONTENT": "Paste the email content you want to summarize here...",
+	"PLACEHOLDER_CUSTOM_SUMMARY_PROMPT": "Enter a custom prompt for summarization (e.g., 'Summarize this email in bullet points')",
+	"PLACEHOLDER_EMAIL_PURPOSE": "e.g., 'Schedule a meeting', 'Follow up on proposal', 'Request information'",
+	"PLACEHOLDER_RECIPIENT": "e.g., 'John Smith, Marketing Manager'",
+	"PLACEHOLDER_KEY_POINTS": "List the main points you want to include in the email...",
+	"PLACEHOLDER_CUSTOM_PROMPT": "Enter your custom AI prompt here...",
+	
+	"WARNING_NO_API_KEY": "OpenAI API key is not configured. Please configure your API key in settings to use AI features.",
+	
+	"ERROR_NO_API_KEY": "OpenAI API key is required",
+	"ERROR_SUMMARIZATION_FAILED": "Failed to summarize email",
+	"ERROR_COMPOSITION_FAILED": "Failed to compose email", 
+	"ERROR_CUSTOM_PROCESSING_FAILED": "Failed to process custom request",
+	"ERROR_INVALID_API_KEY": "Invalid API key format (should start with 'sk-')",
+	"ERROR_INVALID_MAX_TOKENS": "Max tokens should be between 100 and 4096",
+	
+	"REPORT_COPIED_TO_CLIPBOARD": "Copied to clipboard",
+	
+	"LABEL_ENABLE_MODULE": "Enable AI Email Assistant",
+	"LABEL_OPENAI_API_KEY": "OpenAI API Key",
+	"LABEL_DEFAULT_MODEL": "Default AI Model",
+	"LABEL_MAX_TOKENS": "Maximum Tokens",
+	
+	"PLACEHOLDER_API_KEY": "Enter your OpenAI API key (sk-...)",
+	
+	"DESCRIPTION_API_KEY": "Your OpenAI API key is required to use AI features. The key is stored securely and only used for API calls.",
+	"DESCRIPTION_MODEL_SELECTION": "Choose the AI model to use. GPT-4 is more capable but slower and more expensive than GPT-3.5.",
+	"DESCRIPTION_MAX_TOKENS": "Maximum number of tokens to use for AI responses. Higher values allow longer responses but cost more.",
+	
+	"LINK_GET_API_KEY": "Get your API key from OpenAI"
+}

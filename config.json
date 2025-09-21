@@ -1,0 +1,17 @@
+{
+	"Disabled": false,
+	"DisplayName": "AI Email Assistant",
+	"Description": "AI-powered email summarization and composition using OpenAI API",
+	"Version": "1.0.0",
+	"Author": "Custom Development",
+	"License": "AGPLv3",
+	"RequiredModules": [
+		"Core",
+		"CoreWebclient",
+		"SettingsWebclient"
+	],
+	"OptionalModules": [
+		"Mail",
+		"MailWebclient"
+	]
+}

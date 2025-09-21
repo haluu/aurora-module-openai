@@ -1,0 +1,47 @@
+{
+	"name": "afterlogic/aurora-module-ai-email-assistant",
+	"type": "aurora-module",
+	"description": "AI Email Assistant module for Aurora framework with OpenAI integration",
+	"homepage": "https://afterlogic.com/",
+	"license": "AGPL-3.0-only",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Custom Development",
+			"email": "support@afterlogic.com",
+			"homepage": "https://afterlogic.com/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "support@afterlogic.com",
+		"issues": "https://github.com/afterlogic/aurora-module-ai-email-assistant/issues"
+	},
+	"require": {
+		"php": ">=7.4.0",
+		"ext-curl": "*",
+		"ext-json": "*"
+	},
+	"suggest": {
+		"ext-openssl": "Required for secure HTTPS connections to OpenAI API"
+	},
+	"autoload": {
+		"psr-4": {
+			"Aurora\\Modules\\AiEmailAssistant\\": ""
+		}
+	},
+	"extra": {
+		"installer-name": "AiEmailAssistant"
+	},
+	"keywords": [
+		"aurora",
+		"webmail", 
+		"email",
+		"ai",
+		"openai",
+		"gpt",
+		"assistant",
+		"summarization",
+		"composition"
+	]
+}
